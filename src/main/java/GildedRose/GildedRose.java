@@ -9,85 +9,85 @@ class GildedRose {
 
     public void updateQuality() {
         for (int i = 0; i < items.length; i++) {
-            updateQualityByName(i);
-            updateSellIn(i);
-            updateQualityToNormalize(i);
+	        Item item = items[i];
+
+            updateQualityByName(item);
+            
+            updateSellIn(item);
+            updateQualityToNormalize(item);
         }
     }
 
-	private void updateQualityToNormalize(int i) {
-		Item item = items[i];
+	private void updateQualityToNormalize(Item item) {
 		if (item.sellIn < 0) {
-		    if (!isAgedBrie(i)) {
-		        if (!isBackstagePassesToAConcert(i)) {
-		            decreaseQualityItem(i);
+		    if (!isAgedBrie(item)) {
+		        if (!isBackstagePassesToAConcert(item)) {
+		            decreaseQualityItem(item);
 		        } else {
 		            item.quality = item.quality - item.quality;
 		        }
 		    } else {
-		        increaseQualityItem(i);
+		        increaseQualityItem(item);
 		    }
 		}
 	}
 
-	private void updateSellIn(int i) {
-		Item item = items[i];
-		if (!isSulfurasHandOfRagnaros(i)) {
+	private void updateSellIn(Item item) {
+		if (!isSulfurasHandOfRagnaros(item)) {
 			item.sellIn = item.sellIn - 1;
 		}
 	}
 
-	private void updateQualityByName(int i) {
-		if (!isAgedBrie(i) && !isBackstagePassesToAConcert(i)) {
-		    decreaseQualityItem(i);
+	private void updateQualityByName(Item item) {
+		if (!isAgedBrie(item) && !isBackstagePassesToAConcert(item)) {
+		    decreaseQualityItem(item);
 		} else {
-		    if (isInQualityLimitToIncrease(i)) {
-		        Item item = items[i];
+		    if (isInQualityLimitToIncrease(item)) {
 				item.quality = item.quality + 1;
 
-		        if (isBackstagePassesToAConcert(i)) {
+		        if (isBackstagePassesToAConcert(item)) {
 		            if (item.sellIn < 11) {
-		                increaseQualityItem(i);
+		                increaseQualityItem(item);
 		            }
 
 		            if (item.sellIn < 6) {
-		                increaseQualityItem(i);
+		                increaseQualityItem(item);
 		            }
 		        }
 		    }
 		}
 	}
 
-	private boolean isSulfurasHandOfRagnaros(int i) {
-		return isNameEquals(i, "Sulfuras, Hand of Ragnaros");
+	private boolean isSulfurasHandOfRagnaros(Item item) {
+		return isNameEquals(item, "Sulfuras, Hand of Ragnaros");
 	}
 
-	private boolean isBackstagePassesToAConcert(int i) {
-		return isNameEquals(i, "Backstage passes to a TAFKAL80ETC concert");
+	private boolean isBackstagePassesToAConcert(Item item) {
+		return isNameEquals(item, "Backstage passes to a TAFKAL80ETC concert");
 	}
 
-	private boolean isAgedBrie(int i) {
-		return isNameEquals(i, "Aged Brie");
+	private boolean isAgedBrie(Item item) {
+		return isNameEquals(item, "Aged Brie");
 	}
 
-	private boolean isInQualityLimitToIncrease(int i) {
-		return items[i].quality < 50;
+	private boolean isInQualityLimitToIncrease(Item item) {
+		return item.quality < 50;
 	}
 
-	private boolean isNameEquals(int i, String valueToCompare) {
-		return items[i].name.equals(valueToCompare);
+	private boolean isNameEquals(Item item, String valueToCompare) {
+		return item.name.equals(valueToCompare);
 	}
 
-	private void increaseQualityItem(int i) {
-		if (isInQualityLimitToIncrease(i)) {
-		    items[i].quality = items[i].quality + 1;
+	private void increaseQualityItem(Item item) {
+		if (isInQualityLimitToIncrease(item)) {
+		    item.quality = item.quality + 1;
 		}
 	}
 
-	private void decreaseQualityItem(int i) {
-		if (items[i].quality > 0) {
-		    if (!isSulfurasHandOfRagnaros(i)) {
-		        items[i].quality = items[i].quality - 1;
+	private void decreaseQualityItem(Item item) {
+		if (item.quality > 0) {
+		    if (!isSulfurasHandOfRagnaros(item)) {
+		        item.quality = item.quality - 1;
 		    }
 		}
 	}
