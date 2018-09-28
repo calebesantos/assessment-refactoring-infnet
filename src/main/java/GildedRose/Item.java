@@ -27,6 +27,7 @@ public class Item {
 					this.decreaseQualityItem();
 				} else {
 					this.quality = this.quality - this.quality;
+					System.out.println(this.quality);
 				}
 			} else {
 				increaseQualityItem();
