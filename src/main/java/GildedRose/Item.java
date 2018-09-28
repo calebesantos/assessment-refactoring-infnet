@@ -14,17 +14,23 @@ public class Item {
 		this.quality = quality;
 	}
 
+	public void updateQuality() {
+		updateQualityByName();
+		updateSellIn();
+		updateQualityToNormalize();
+	}
+
 	public void updateQualityToNormalize() {
 		if (this.sellIn < 0) {
-		    if (!isAgedBrie()) {
-		        if (!isBackstagePassesToAConcert()) {
-		        	this.decreaseQualityItem();
-		        } else {
-		        	this.quality = this.quality - this.quality;
-		        }
-		    } else {
-		        increaseQualityItem();
-		    }
+			if (!isAgedBrie()) {
+				if (!isBackstagePassesToAConcert()) {
+					this.decreaseQualityItem();
+				} else {
+					this.quality = this.quality - this.quality;
+				}
+			} else {
+				increaseQualityItem();
+			}
 		}
 	}
 
@@ -36,21 +42,21 @@ public class Item {
 
 	public void updateQualityByName() {
 		if (!isAgedBrie() && !isBackstagePassesToAConcert()) {
-		    decreaseQualityItem();
+			decreaseQualityItem();
 		} else {
-		    if (isInQualityLimitToIncrease()) {
+			if (isInQualityLimitToIncrease()) {
 				this.quality = this.quality + 1;
 
-		        if (isBackstagePassesToAConcert()) {
-		            if (this.sellIn < 11) {
-		                increaseQualityItem();
-		            }
+				if (isBackstagePassesToAConcert()) {
+					if (this.sellIn < 11) {
+						increaseQualityItem();
+					}
 
-		            if (this.sellIn < 6) {
-		                increaseQualityItem();
-		            }
-		        }
-		    }
+					if (this.sellIn < 6) {
+						increaseQualityItem();
+					}
+				}
+			}
 		}
 	}
 
