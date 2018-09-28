@@ -16,12 +16,13 @@ class GildedRose {
     }
 
 	private void updateQualityToNormalize(int i) {
-		if (items[i].sellIn < 0) {
+		Item item = items[i];
+		if (item.sellIn < 0) {
 		    if (!isAgedBrie(i)) {
 		        if (!isBackstagePassesToAConcert(i)) {
 		            decreaseQualityItem(i);
 		        } else {
-		            items[i].quality = items[i].quality - items[i].quality;
+		            item.quality = item.quality - item.quality;
 		        }
 		    } else {
 		        increaseQualityItem(i);
@@ -30,8 +31,9 @@ class GildedRose {
 	}
 
 	private void updateSellIn(int i) {
+		Item item = items[i];
 		if (!isSulfurasHandOfRagnaros(i)) {
-		    items[i].sellIn = items[i].sellIn - 1;
+			item.sellIn = item.sellIn - 1;
 		}
 	}
 
@@ -40,14 +42,15 @@ class GildedRose {
 		    decreaseQualityItem(i);
 		} else {
 		    if (isInQualityLimitToIncrease(i)) {
-		        items[i].quality = items[i].quality + 1;
+		        Item item = items[i];
+				item.quality = item.quality + 1;
 
 		        if (isBackstagePassesToAConcert(i)) {
-		            if (items[i].sellIn < 11) {
+		            if (item.sellIn < 11) {
 		                increaseQualityItem(i);
 		            }
 
-		            if (items[i].sellIn < 6) {
+		            if (item.sellIn < 6) {
 		                increaseQualityItem(i);
 		            }
 		        }
